@@ -43,7 +43,7 @@ std::tuple<std::vector<int>, std::vector<int> > split_vector(std::vector<int> my
 std::tuple<std::vector<int>, int> count_merge(std::tuple<std::vector<int>, int> fhalf_tup, std::tuple<std::vector<int>, int> shalf_tup) {
 
     std::vector<int> fhalf = std::get<0>(fhalf_tup), shalf = std::get<0>(shalf_tup);
-    int inv = std::get<1>(fhalf_tup) + std::get<1>(shalf_tup), merge_inv = 0;
+    int inv = std::get<1>(fhalf_tup) + std::get<1>(shalf_tup);
 
     int f = 0, s = 0;
     int F = fhalf.size(), S = shalf.size();
@@ -57,7 +57,8 @@ std::tuple<std::vector<int>, int> count_merge(std::tuple<std::vector<int>, int> 
         } else {
             merged_vec.push_back(s_elem);
             s++;
-            merge_inv++;
+            int tmp_inv = F - f;
+            inv = inv + tmp_inv;
         }
     }
 
@@ -71,5 +72,5 @@ std::tuple<std::vector<int>, int> count_merge(std::tuple<std::vector<int>, int> 
         s++;
     }
 
-    return std::make_tuple(merged_vec, inv + merge_inv);
+    return std::make_tuple(merged_vec, inv);
 }
